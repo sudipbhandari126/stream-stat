@@ -29,8 +29,8 @@ public class CumulatorController {
     @GetMapping("/samples")
     public ResponseEntity<StatsResponse> get(){
         Integer last5MinutesSum = findStat(5);
-        Integer last10MinutesSum = findStat(5);
-        Integer last30MinutesSum = findStat(5);
+        Integer last10MinutesSum = findStat(10);
+        Integer last30MinutesSum = findStat(30);
         StatsResponse statsResponse = new StatsResponse();
         statsResponse.setLast5MinutesSum(last5MinutesSum);
         statsResponse.setLast10MinutesSum(last10MinutesSum);
