@@ -24,5 +24,21 @@ public class StreamData {
 
     private String numberStream; //comma separated 5 random numbers
 
-    private Long sum;
+    private Integer sum;
+
+    public String getNumberStream() {
+        return numberStream;
+    }
+
+    public void setNumberStream(String numberStream) {
+        this.numberStream = numberStream;
+    }
+
+    public Integer getSum() {
+        return sum;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
+    }
 }
