@@ -16,7 +16,9 @@ public class RandomNumberGenerator extends TimerTask {
 
     @Override
     public void run() {
+        System.out.println("random number generator called");
         randomNumber = random.nextInt(100);
+
     }
 
 

@@ -15,22 +15,22 @@ public class StreamProducer {
     private RandomNumberGenerator randomNumberGenerator;
 
     public void generateStream(){
-        String stream;
-        List<Integer> randomNumberList = new ArrayList<>(5);
-        int sum=0;
-        Timer timer = new Timer();
-        while (true){
-            sum=0;
-            randomNumberList.clear();
-            for (int i=0;i<5;i++){
-                int rand =randomNumberGenerator.getRandomNumber();
-                sum+= rand;
-                randomNumberList.add(rand);
-            }
-            for (int i: randomNumberList){
-                System.out.println(i);
-            }
-        }
+//        String stream;
+//        List<Integer> randomNumberList = new ArrayList<>(5);
+//        int sum=0;
+//        Timer timer = new Timer();
+//        while (true){
+//            sum=0;
+//            randomNumberList.clear();
+//            for (int i=0;i<5;i++){
+//                int rand =randomNumberGenerator.getRandomNumber();
+//                sum+= rand;
+//                randomNumberList.add(rand);
+//            }
+//            for (int i: randomNumberList){
+//                System.out.println(i);
+//            }
+//        }
 
 
     }
@@ -39,6 +39,7 @@ public class StreamProducer {
     @PostConstruct
     public void init(){
         Timer timer = new Timer();
-        timer.schedule(randomNumberGenerator,200); //5 times a second
+        timer.schedule(randomNumberGenerator,0,200); //5 times a second
+        System.out.println("timer initialized");
     }
 }
