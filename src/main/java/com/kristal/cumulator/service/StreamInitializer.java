@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class StreamInitializer {
@@ -15,6 +16,9 @@ public class StreamInitializer {
     @Autowired
     private StreamDataSaver streamDataSaver;
 
+    @Autowired
+    private DBCleaner dbCleaner;
+
     @PostConstruct
     public void init(){
         Timer timer = new Timer();
@@ -23,6 +27,9 @@ public class StreamInitializer {
 
         timer.schedule(streamDataSaver,0,1000);
         System.out.println("stream data saver initialized for every 1 sec");
+
+        timer.schedule(dbCleaner, 5 * 60 *60 *1000);
+        System.out.println("scheduled a job to clean up the db every 5 hours");
     }
 }
 
