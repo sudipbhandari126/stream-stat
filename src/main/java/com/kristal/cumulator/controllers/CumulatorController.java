@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Calendar;
+import java.util.Date;
+
 @RestController
 @RequestMapping("/kristal/cumulator")
 public class CumulatorController {
@@ -25,8 +28,12 @@ public class CumulatorController {
 
     @GetMapping("/samples")
     public Iterable<StreamData> get(){
-        return streamDataRepository.findAll();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, -15);
+        return streamDataRepository.findByCreatedAtGreaterThan(cal.getTime());
     }
+
+
 
 
 
