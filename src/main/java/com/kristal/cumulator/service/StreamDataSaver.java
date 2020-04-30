@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,16 +31,19 @@ public class StreamDataSaver extends TimerTask {
     @Override
     public void run() {
         List<Integer> randomNumberList = randomNumberGenerator.getRandomNumberList();
+        System.out.println("stream data saver called=>" + randomNumberList);
+        Object[] objects = Arrays.copyOf(randomNumberList.toArray(), randomNumberList.size());
         kristalExecutorService.getExecutorService().submit(()->{
-            saveToDb(randomNumberList);
+            saveToDb(objects);
         });
         randomNumberGenerator.clearList();
     }
 
-    private void saveToDb(List<Integer> randomNumberList) {
-        Integer sum = randomNumberList.stream().reduce(0, (a, b) -> a + b);
-        String collect = randomNumberList.stream().
-                map(String::valueOf).
+    private void saveToDb(Object[] randomNumberList) {
+        List<Object> objects = Arrays.asList(randomNumberList);
+        Integer sum = objects.stream().map(a->(Integer)a).reduce(0, (a, b) -> a + b);
+        String collect = objects.stream().
+                map(Object::toString).
                 collect(Collectors.joining(","));
         StreamData streamData = new StreamData();
         streamData.setNumberStream(collect);
