@@ -27,15 +27,24 @@ public class CumulatorController {
     }
 
     @GetMapping("/samples")
-    public Iterable<StreamData> get(){
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, -15);
-        return streamDataRepository.findByCreatedAtGreaterThan(cal.getTime());
+    public ResponseEntity<StatsResponse> get(){
+        Integer last5MinutesSum = findStat(5);
+        Integer last10MinutesSum = findStat(5);
+        Integer last30MinutesSum = findStat(5);
+        StatsResponse statsResponse = new StatsResponse();
+        statsResponse.setLast5MinutesSum(last5MinutesSum);
+        statsResponse.setLast10MinutesSum(last10MinutesSum);
+        statsResponse.setLast30MinutesSum(last30MinutesSum);
+        return new ResponseEntity<>(statsResponse,HttpStatus.OK);
     }
 
-
-
-
+    private Integer findStat(int delayMinutes) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, -delayMinutes);
+        return streamDataRepository.findByCreatedAtGreaterThan(cal.getTime()).stream()
+                .map(each -> each.getSum())
+                .reduce(0, (a, b) -> a + b);
+    }
 
 
 }
