@@ -21,3 +21,7 @@ Endpoint:
 curl -X GET http://localhost:8080/kristal/cumulator/samples
 {"last5MinutesSum":52064,"last10MinutesSum":125496,"last30MinutesSum":173152}
 ```
+
+As of 2020-April-30th this has been also deployed at Heroku:
+
+Link:: https://damp-beach-02547.herokuapp.com/kristal/cumulator/samples
