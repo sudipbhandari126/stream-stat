@@ -4,6 +4,7 @@ package com.kristal.cumulator.controllers;
 import com.kristal.cumulator.models.StatsResponse;
 import com.kristal.cumulator.models.entities.StreamData;
 import com.kristal.cumulator.repository.StreamDataRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/kristal/cumulator")
+@Slf4j
 public class CumulatorController {
     @Autowired
     private StreamDataRepository streamDataRepository;
@@ -28,6 +30,7 @@ public class CumulatorController {
 
     @GetMapping("/samples")
     public ResponseEntity<StatsResponse> get(){
+        log.info("fetching stream cumulation samples for 5,10 and 30 minutes");
         Integer last5MinutesSum = findStat(5);
         Integer last10MinutesSum = findStat(10);
         Integer last30MinutesSum = findStat(30);

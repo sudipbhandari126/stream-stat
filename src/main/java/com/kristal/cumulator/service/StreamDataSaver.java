@@ -3,6 +3,7 @@ package com.kristal.cumulator.service;
 import com.kristal.cumulator.models.entities.StreamData;
 import com.kristal.cumulator.repository.StreamDataRepository;
 import com.kristal.cumulator.util.KristalExecutorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class StreamDataSaver extends TimerTask {
 
     @Autowired
@@ -31,7 +33,7 @@ public class StreamDataSaver extends TimerTask {
     @Override
     public void run() {
         List<Integer> randomNumberList = randomNumberGenerator.getRandomNumberList();
-        System.out.println("stream data saver called=>" + randomNumberList);
+        log.info("stream data saver called=> {}", randomNumberList);
         Object[] objects = Arrays.copyOf(randomNumberList.toArray(), randomNumberList.size());
         kristalExecutorService.getExecutorService().submit(()->{
             saveToDb(objects);

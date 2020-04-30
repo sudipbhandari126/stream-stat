@@ -1,5 +1,6 @@
 package com.kristal.cumulator.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +11,7 @@ import java.util.TimerTask;
 
 
 @Component
+@Slf4j
 public class RandomNumberGenerator extends TimerTask {
     private int randomNumber;
 
@@ -20,7 +22,7 @@ public class RandomNumberGenerator extends TimerTask {
     @Override
     public void run() {
         randomNumber = random.nextInt(100);
-        System.out.println("random number generator called=="+randomNumber);
+        log.info("random number generator called==",randomNumber);
         randomNumberList.add(randomNumber);
     }
 

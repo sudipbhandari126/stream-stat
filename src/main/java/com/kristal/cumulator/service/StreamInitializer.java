@@ -1,5 +1,6 @@
 package com.kristal.cumulator.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 public class StreamInitializer {
 
     @Autowired
@@ -23,13 +25,14 @@ public class StreamInitializer {
     public void init(){
         Timer timer = new Timer();
         timer.schedule(randomNumberGenerator,0,200); //5 times a second
-        System.out.println("random number generator  initialized for every 200 ms");
+        log.info("random number generator  initialized for every 200 ms");
 
         timer.schedule(streamDataSaver,0,1000);
-        System.out.println("stream data saver initialized for every 1 sec");
+        log.info("stream data saver initialized for every 1 sec");
 
         timer.schedule(dbCleaner, 5 * 60 *60 *1000);
-        System.out.println("scheduled a job to clean up the db every 5 hours");
+        log.info("scheduled a job to clean up the db every 5 hours");
+
     }
 }
 
