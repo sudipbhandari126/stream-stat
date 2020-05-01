@@ -30,7 +30,7 @@ public class StreamInitializer {
         timer.schedule(streamDataSaver,0,1000);
         log.info("stream data saver initialized for every 1 sec");
 
-        timer.schedule(dbCleaner, 5 * 60 *60 *1000);
+        timer.schedule(dbCleaner, 1 * 60 *60 *1000);
         log.info("scheduled a job to clean up the db every 5 hours");
 
     }
