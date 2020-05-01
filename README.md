@@ -26,6 +26,9 @@ Components
   379 | 2020-05-01 03:13:08.158 | 84,16,21,12,30 | 163 | 2020-05-01 03:13:08.158
 
 ```
+
+- Index:
+    ```create index concurrently "index_created_at" on stream_data using btree (created_at);```
     
 Usage:
 - Run as a springboot app (modify db details for local postgres)
